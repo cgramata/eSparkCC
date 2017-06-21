@@ -2,31 +2,35 @@ import csv
 
 
 def importFiles():
-	domainDictionary = {}
-
+	listOfRows = []
 	domainFile = open("domain_order.csv")
 	scoresFiles = open("student_tests.csv")
 
 	domainFileReader = csv.reader(domainFile, delimiter=',')
 
 	for row in domainFileReader:
-		row = filter(None, row)
-		storeDomainValues(row, domainDictionary)
-
-	print(domainDictionary)
+		listOfRows.append(row)
 
 	domainFile.close()
 
+	return (listOfRows)
 
-def storeDomainValues(rowParam, aDictionary):
+
+def storeDomainValues(domainReader, aDictionary):
 	localDomainDictionary = aDictionary
+	localDomainFileReader = domainReader
 
-	localDomainDictionary[rowParam[0]] = rowParam[1:]
-
+	for row in localDomainFileReader:
+		row = filter(None, row)
+		localDomainDictionary[row[0]] = row[1:]
 
 
 def main():
+	domainDictionary = {} 
 
-	importFiles()
+	domainFileReaderMain = importFiles()
+	storeDomainValues(domainFileReaderMain, domainDictionary)
+
+	print(domainDictionary)
 
 if __name__ == "__main__": main()
