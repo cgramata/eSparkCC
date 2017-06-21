@@ -2,35 +2,49 @@ import csv
 
 
 def importFiles():
-	listOfRows = []
+	listOfDomainRows = []
+	listOfTestScoreRows = []
 	domainFile = open("domain_order.csv")
-	scoresFiles = open("student_tests.csv")
+	scoresFile = open("student_tests.csv")
 
 	domainFileReader = csv.reader(domainFile, delimiter=',')
+	scoresFileReader = csv.reader(scoresFile, delimiter=',')
+	
 
 	for row in domainFileReader:
-		listOfRows.append(row)
+		listOfDomainRows.append(row)
+
+	for row in scoresFileReader:
+		listOfTestScoreRows.append(row)
 
 	domainFile.close()
 
-	return (listOfRows)
+	return (listOfDomainRows, listOfTestScoreRows)
 
 
-def storeDomainValues(domainReader, aDictionary):
+def storeDomainValues(domainList, scoreTestList, aDictionary, bDictionary):
 	localDomainDictionary = aDictionary
-	localDomainFileReader = domainReader
+	localTestScoreDictionary = bDictionary
+	localDomainFileList = domainList
+	localTestScoreFileList = scoreTestList
 
-	for row in localDomainFileReader:
+	for row in localDomainFileList:
 		row = filter(None, row)
 		localDomainDictionary[row[0]] = row[1:]
 
+	for row in localTestScoreFileList:
+		row = filter(None, row)
+		localTestScoreDictionary[row[0]] = row[1:]
+
 
 def main():
-	domainDictionary = {} 
+	domainDictionary = {}
+	testScoreDictionary = {}
 
-	domainFileReaderMain = importFiles()
-	storeDomainValues(domainFileReaderMain, domainDictionary)
+	domainFileReaderMain, testScoresReaderMain = importFiles()
+	storeDomainValues(domainFileReaderMain, testScoresReaderMain, domainDictionary, testScoreDictionary)
 
 	print(domainDictionary)
+	print(testScoreDictionary)
 
 if __name__ == "__main__": main()
