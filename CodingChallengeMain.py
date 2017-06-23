@@ -22,29 +22,43 @@ def importFiles():
 	return (listOfDomainRows, listOfTestScoreRows)
 
 
-def storeDomainValues(domainList, scoreTestList, aDictionary, bDictionary):
+def storeFileValues(domainList, scoreTestList, aDictionary, bDictionary, listOfNames, testScoresLayout):
 	localDomainDictionary = aDictionary
 	localTestScoreDictionary = bDictionary
 	localDomainFileList = domainList
 	localTestScoreFileList = scoreTestList
+	localListOfNames = listOfNames
+	localScoresLayout = testScoresLayout
 
 	for row in localDomainFileList:
 		row = filter(None, row)
 		localDomainDictionary[row[0]] = row[1:]
 
-	for row in localTestScoreFileList:
+	for row in localTestScoreFileList[1:]:
 		row = filter(None, row)
 		localTestScoreDictionary[row[0]] = row[1:]
+		localListOfNames.append(row[0])
+
+	localScoresLayout.append(localTestScoreFileList[0][1:])
 
 
 def main():
 	domainDictionary = {}
 	testScoreDictionary = {}
+	listOfStudentNames = []
+	layoutOfScores = []
+
 
 	domainFileReaderMain, testScoresReaderMain = importFiles()
-	storeDomainValues(domainFileReaderMain, testScoresReaderMain, domainDictionary, testScoreDictionary)
+	storeFileValues(domainFileReaderMain, testScoresReaderMain, domainDictionary, testScoreDictionary, listOfStudentNames, layoutOfScores)
 
+	
+	print(listOfStudentNames)
+	print
+	print(layoutOfScores)
+	print
 	print(domainDictionary)
+	print
 	print(testScoreDictionary)
 
 if __name__ == "__main__": main()
