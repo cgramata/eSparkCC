@@ -1,4 +1,8 @@
 import csv
+from currSize import CurrSize
+from studentResultObject import StudentResultObject
+from curriculumAssignment import CurriculumAssignment
+
 
 
 def importFiles():
@@ -10,7 +14,6 @@ def importFiles():
 	domainFileReader = csv.reader(domainFile, delimiter=',')
 	scoresFileReader = csv.reader(scoresFile, delimiter=',')
 	
-
 	for row in domainFileReader:
 		listOfDomainRows.append(row)
 
@@ -22,43 +25,24 @@ def importFiles():
 	return (listOfDomainRows, listOfTestScoreRows)
 
 
-def storeFileValues(domainList, scoreTestList, aDictionary, bDictionary, listOfNames, testScoresLayout):
-	localDomainDictionary = aDictionary
-	localTestScoreDictionary = bDictionary
-	localDomainFileList = domainList
-	localTestScoreFileList = scoreTestList
-	localListOfNames = listOfNames
-	localScoresLayout = testScoresLayout
-
-	for row in localDomainFileList:
-		row = filter(None, row)
-		localDomainDictionary[row[0]] = row[1:]
-
-	for row in localTestScoreFileList[1:]:
-		row = filter(None, row)
-		localTestScoreDictionary[row[0]] = row[1:]
-		localListOfNames.append(row[0])
-
-	localScoresLayout.append(localTestScoreFileList[0][1:])
-
-
 def main():
 	domainDictionary = {}
+	domainGradeRange = []
 	testScoreDictionary = {}
 	listOfStudentNames = []
 	layoutOfScores = []
+	gradeRange = []
 
-
+	testAssignment = CurriculumAssignment()
 	domainFileReaderMain, testScoresReaderMain = importFiles()
-	storeFileValues(domainFileReaderMain, testScoresReaderMain, domainDictionary, testScoreDictionary, listOfStudentNames, layoutOfScores)
+	testAssignment.storeFileValues(domainFileReaderMain,testScoresReaderMain,domainDictionary,domainGradeRange,testScoreDictionary,listOfStudentNames,layoutOfScores)
 
+	testingClass = CurrSize()
+	studentObjectTest = StudentResultObject("Amy","K",3,2,1)
+	studentObjectTest = StudentResultObject("Carl","K",1,4,7)
 	
-	print(listOfStudentNames)
-	print
-	print(layoutOfScores)
-	print
-	print(domainDictionary)
-	print
-	print(testScoreDictionary)
+
+	print(studentObjectTest.studentName)
+	
 
 if __name__ == "__main__": main()
