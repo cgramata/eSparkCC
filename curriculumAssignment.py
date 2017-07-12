@@ -4,18 +4,23 @@ class CurriculumAssignment:
 	def storeFileValues(self, domainList, scoreTestList, domainDictionary, domainGradeRange, scoreDictionary, listOfNames, testScoresLayout):
 		for row in domainList:
 			row = filter(None, row)
-			domainDictionary[row[0]] = row[1:]
+			if row[0] == "K":
+				row[0] = '0'
+			domainDictionary[int(row[0])] = row[1:]
 			domainGradeRange.append(row[0])
 
-		self.replaceKValue(domainGradeRange)
+		self.replaceKValueInList(domainGradeRange)
 		self.strValuesToInt(domainGradeRange)
 		self.increaseMaxGrade(domainGradeRange)
 		
-		#adds another grade to the max grade range
 		for row in scoreTestList[1:]:
 			row = filter(None, row)
 			scoreDictionary[row[0]] = row[1:]
 			listOfNames.append(row[0])
+
+		for name in listOfNames:
+			self.replaceKValueInList(scoreDictionary[name])
+			self.strValuesToInt(scoreDictionary[name])
 
 		for row in scoreTestList[0:1]:
 			for value in row[1:]:
@@ -33,12 +38,10 @@ class CurriculumAssignment:
 
 
 	#If it has the value "K" it is replaced with an int value of 0
-	def replaceKValue(self, scoreList):
-
+	def replaceKValueInList(self, scoreList):
 		for score in range(len(scoreList)):
 			if scoreList[score] == "K":
-				scoreList[score] = 0 
-
+				scoreList[score] = "0" 
 
 	#def storeStudentAttributes(self, name):
 

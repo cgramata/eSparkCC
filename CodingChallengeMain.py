@@ -44,7 +44,7 @@ def main():
 	curriculumObject.storeFileValues(domainFileReaderMain,testScoresReaderMain,domainDictionary,domainGradeRange,
 		testScoreDictionary,listOfStudentNames,layoutOfScores)
 
-	print(domainGradeRange)
+
 	#for name in range(len(listOfStudentNames)-1):
 
 	
