@@ -2,7 +2,7 @@ import csv
 from currSize import CurrSize
 from studentResultObject import StudentResultObject
 from curriculumAssignment import CurriculumAssignment
-
+from currSize import CurrSize
 
 
 def importFiles():
@@ -32,17 +32,30 @@ def main():
 	listOfStudentNames = []
 	layoutOfScores = []
 	gradeRange = []
+	resultingCurriculum = []
 
-	testAssignment = CurriculumAssignment()
+	#creates objects to access methods or variables
+	curriculumAttribute = CurrSize()
+	curriculumObject = CurriculumAssignment()
+
+	#first stores raw data from csv files
+	#then stores broken down data into lists and dictionaries
 	domainFileReaderMain, testScoresReaderMain = importFiles()
-	testAssignment.storeFileValues(domainFileReaderMain,testScoresReaderMain,domainDictionary,domainGradeRange,testScoreDictionary,listOfStudentNames,layoutOfScores)
+	curriculumObject.storeFileValues(domainFileReaderMain,testScoresReaderMain,domainDictionary,domainGradeRange,
+		testScoreDictionary,listOfStudentNames,layoutOfScores)
 
-	testingClass = CurrSize()
-	studentObjectTest = StudentResultObject("Amy","K",3,2,1)
-	studentObjectTest = StudentResultObject("Carl","K",1,4,7)
+	print(domainGradeRange)
+	#for name in range(len(listOfStudentNames)-1):
+
 	
 
-	print(studentObjectTest.studentName)
+	#studentObjectTest = StudentResultObject("Amy","K",3,2,1)
+	#studentObjectTest = StudentResultObject("Carl","K",1,4,7)
+	
+
+	#print(studentObjectTest.studentName)
+	
 	
 
 if __name__ == "__main__": main()
+
