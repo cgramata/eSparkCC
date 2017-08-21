@@ -2,7 +2,6 @@ import csv
 from currSize import CurrSize
 from studentResultObject import StudentResultObject
 from curriculumAssignment import CurriculumAssignment
-from currSize import CurrSize
 
 
 def importFiles():
@@ -32,7 +31,7 @@ def main():
 	listOfStudentNames = []
 	layoutOfScores = []
 	gradeRange = []
-	resultingCurriculum = []
+	finalStudentCurriculum = []
 
 	#creates objects to access methods or variables
 	curriculumAttribute = CurrSize()
@@ -45,17 +44,14 @@ def main():
 		testScoreDictionary,listOfStudentNames,layoutOfScores)
 
 
-	#for name in range(len(listOfStudentNames)-1):
+	for entry in range(len(listOfStudentNames)):
+		name = listOfStudentNames[entry]
+		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name, testScoreDictionary, domainDictionary, curriculumAttribute.curriculumSize)
+		finalStudentCurriculum.append(madeCurriculum)
 
-	
+	for curriculum in finalStudentCurriculum:
+		print curriculum
 
-	#studentObjectTest = StudentResultObject("Amy","K",3,2,1)
-	#studentObjectTest = StudentResultObject("Carl","K",1,4,7)
-	
-
-	#print(studentObjectTest.studentName)
-	
-	
 
 if __name__ == "__main__": main()
 

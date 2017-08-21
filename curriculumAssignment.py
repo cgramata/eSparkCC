@@ -1,3 +1,5 @@
+from studentResultObject import StudentResultObject
+
 class CurriculumAssignment:
 
 	#takes in raw data as first two parameters, stores resulting information into tables and dictionaries
@@ -43,15 +45,24 @@ class CurriculumAssignment:
 			if scoreList[score] == "K":
 				scoreList[score] = "0" 
 
-	#def storeStudentAttributes(self, name):
 
+	def makeTheCurriculumPerStudent(self, studentName, testScoreDictionary, domainDictionary, sizeOfNeededCurriculum):
 
-	#def makeTheCurriculum(self, finalCurriculumList, numberOfCurriculum):
+		resultingCurriculum = []
+		minResult = min(testScoreDictionary[studentName])
+		maxResult = max(testScoreDictionary[studentName]) 
 
-		#while len(finalCurriculumList) != numberOfCurriculum:
-			#for 
-	
+		studentObject = StudentResultObject(studentName, testScoreDictionary[studentName])
 
+		resultingCurriculum.append(studentName)
+		studentCurriculumSize = len(resultingCurriculum)
 
-
-
+		while studentCurriculumSize != sizeOfNeededCurriculum:
+			for key in range(minResult,maxResult+1):
+				curriculumOrder = domainDictionary[key]
+				for curriculum in curriculumOrder:
+					if getattr(studentObject,curriculum) <= key:
+						resultingCurriculum.append(str(key)+'.'+curriculum)
+						studentCurriculumSize = len(resultingCurriculum)
+						setattr(studentObject,curriculum,getattr(studentObject,curriculum)+1)
+			return(resultingCurriculum)
