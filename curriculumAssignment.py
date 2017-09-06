@@ -49,20 +49,25 @@ class CurriculumAssignment:
 	def makeTheCurriculumPerStudent(self, studentName, testScoreDictionary, domainDictionary, sizeOfNeededCurriculum):
 
 		resultingCurriculum = []
-		minResult = min(testScoreDictionary[studentName])
-		maxResult = max(testScoreDictionary[studentName]) 
+		minResult = min(testScoreDictionary[studentName]) 
 
 		studentObject = StudentResultObject(studentName, testScoreDictionary[studentName])
 
 		resultingCurriculum.append(studentName)
-		studentCurriculumSize = len(resultingCurriculum)
+		
 
-		while studentCurriculumSize != sizeOfNeededCurriculum:
-			for key in range(minResult,maxResult+1):
-				curriculumOrder = domainDictionary[key]
-				for curriculum in curriculumOrder:
-					if getattr(studentObject,curriculum) <= key:
+		for key in range(minResult,sizeOfNeededCurriculum):
+
+			curriculumOrder = domainDictionary[key]
+			for curriculum in curriculumOrder:
+				if getattr(studentObject,curriculum) <= key and len(resultingCurriculum) != sizeOfNeededCurriculum:
+					if key == 0:
+						resultingCurriculum.append('K'+'.'+curriculum)
+						studentCurriculumSize = len(resultingCurriculum)
+						setattr(studentObject,curriculum,getattr(studentObject,curriculum)+1)
+					else:
 						resultingCurriculum.append(str(key)+'.'+curriculum)
 						studentCurriculumSize = len(resultingCurriculum)
 						setattr(studentObject,curriculum,getattr(studentObject,curriculum)+1)
-			return(resultingCurriculum)
+
+		return(resultingCurriculum)

@@ -20,6 +20,7 @@ def importFiles():
 		listOfTestScoreRows.append(row)
 
 	domainFile.close()
+	scoresFile.close()
 
 	return (listOfDomainRows, listOfTestScoreRows)
 
