@@ -45,11 +45,11 @@ def main():
 		testScoreDictionary,listOfStudentNames,layoutOfScores)
 
 
-	for entry in range(len(listOfStudentNames)):
-		name = listOfStudentNames[entry]
+	for name in listOfStudentNames:
 		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name, testScoreDictionary, domainDictionary, curriculumAttribute.curriculumSize)
 		finalStudentCurriculum.append(madeCurriculum)
 
+	#todo change this to write to a csv file instead of printing
 	for curriculum in finalStudentCurriculum:
 		print curriculum
 
