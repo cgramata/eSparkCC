@@ -3,18 +3,21 @@ from studentResultObject import StudentResultObject
 class CurriculumAssignment:
 
 	#takes in raw data as first two parameters, stores resulting information into tables and dictionaries
-	def storeFileValues(self, domainList, scoreTestList, domainDictionary, domainGradeRange, scoreDictionary, listOfNames, testScoresLayout):
+	def storeFileValues(self,
+						domainList,
+						scoreTestList,
+						domainDictionary,
+						scoreDictionary,
+						listOfNames,
+						testScoresLayout):
+
 		for row in domainList:
 			row = filter(None, row)
 			if row[0] == "K":
-				row[0] = '0'
+				row[0] = "0"
 			domainDictionary[int(row[0])] = row[1:]
-			domainGradeRange.append(row[0])
+			
 
-		self.replaceKValueInList(domainGradeRange)
-		self.strValuesToInt(domainGradeRange)
-		self.increaseMaxGrade(domainGradeRange)
-		
 		for row in scoreTestList[1:]:
 			row = filter(None, row)
 			scoreDictionary[row[0]] = row[1:]
@@ -34,10 +37,6 @@ class CurriculumAssignment:
 			listWithStr[entry] = int(listWithStr[entry])
 
 
-	def increaseMaxGrade(self, listOfGrades):
-		newMaxGrade = max(listOfGrades) + 1
-		listOfGrades.append(newMaxGrade)
-
 
 	#If it has the value "K" it is replaced with an int value of 0
 	def replaceKValueInList(self, scoreList):
@@ -46,7 +45,11 @@ class CurriculumAssignment:
 				scoreList[score] = "0" 
 
 
-	def makeTheCurriculumPerStudent(self, studentName, testScoreDictionary, domainDictionary, sizeOfNeededCurriculum):
+	def makeTheCurriculumPerStudent(self,
+									studentName,
+									testScoreDictionary,
+									domainDictionary,
+									sizeOfNeededCurriculum):
 
 		resultingCurriculum = []
 		minResult = min(testScoreDictionary[studentName]) 
@@ -62,11 +65,11 @@ class CurriculumAssignment:
 			for curriculum in curriculumOrder:
 				if getattr(studentObject,curriculum) <= key and len(resultingCurriculum) != sizeOfNeededCurriculum:
 					if key == 0:
-						resultingCurriculum.append('K'+'.'+curriculum)
+						resultingCurriculum.append("K"+"."+curriculum)
 						studentCurriculumSize = len(resultingCurriculum)
 						setattr(studentObject,curriculum,getattr(studentObject,curriculum)+1)
 					else:
-						resultingCurriculum.append(str(key)+'.'+curriculum)
+						resultingCurriculum.append(str(key)+"."+curriculum)
 						studentCurriculumSize = len(resultingCurriculum)
 						setattr(studentObject,curriculum,getattr(studentObject,curriculum)+1)
 

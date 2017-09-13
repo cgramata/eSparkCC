@@ -1,52 +1,38 @@
-import csv
 from currSize import CurrSize
 from studentResultObject import StudentResultObject
 from curriculumAssignment import CurriculumAssignment
-
-
-def importFiles():
-	listOfDomainRows = []
-	listOfTestScoreRows = []
-	domainFile = open("domain_order.csv")
-	scoresFile = open("student_tests.csv")
-
-	domainFileReader = csv.reader(domainFile, delimiter=',')
-	scoresFileReader = csv.reader(scoresFile, delimiter=',')
-	
-	for row in domainFileReader:
-		listOfDomainRows.append(row)
-
-	for row in scoresFileReader:
-		listOfTestScoreRows.append(row)
-
-	domainFile.close()
-	scoresFile.close()
-
-	return (listOfDomainRows, listOfTestScoreRows)
+from importTranslateRawData import ImportTranslateRawData
 
 
 def main():
 	domainDictionary = {}
-	domainGradeRange = []
 	testScoreDictionary = {}
 	listOfStudentNames = []
 	layoutOfScores = []
-	gradeRange = []
 	finalStudentCurriculum = []
+
+	dataObject = ImportTranslateRawData()
+	domainFileReaderMain = dataObject.importDomainFile()
+	testScoresReaderMain = dataObject.importStudentTestFile()
 
 	#creates objects to access methods or variables
 	curriculumAttribute = CurrSize()
 	curriculumObject = CurriculumAssignment()
 
-	#first stores raw data from csv files
-	#then stores broken down data into lists and dictionaries
-	domainFileReaderMain, testScoresReaderMain = importFiles()
-	curriculumObject.storeFileValues(domainFileReaderMain,testScoresReaderMain,domainDictionary,domainGradeRange,
-		testScoreDictionary,listOfStudentNames,layoutOfScores)
+
+	curriculumObject.storeFileValues(domainFileReaderMain,
+									 testScoresReaderMain,
+									 domainDictionary,
+									 testScoreDictionary,
+									 listOfStudentNames,
+									 layoutOfScores)
 
 
 	for name in listOfStudentNames:
-		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name, testScoreDictionary, domainDictionary, curriculumAttribute.curriculumSize)
+		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name, 
+																	  testScoreDictionary,
+																	  domainDictionary,
+																	  curriculumAttribute.curriculumSize)
 		finalStudentCurriculum.append(madeCurriculum)
 
 	#todo change this to write to a csv file instead of printing
