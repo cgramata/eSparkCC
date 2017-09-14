@@ -1,7 +1,7 @@
 import csv
 
-class ImportTranslateRawData:
-
+class ImportRawData:
+		
 	def importDomainFile(self):
 		listOfDomainRows = []
 
@@ -32,4 +32,5 @@ class ImportTranslateRawData:
 					listOfTestScoreRows.append(row)
 
 		return (listOfTestScoreRows)
-		
+
+

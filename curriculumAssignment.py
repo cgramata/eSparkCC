@@ -8,8 +8,7 @@ class CurriculumAssignment:
 						scoreTestList,
 						domainDictionary,
 						scoreDictionary,
-						listOfNames,
-						testScoresLayout):
+						listOfNames):
 
 		for row in domainList:
 			row = filter(None, row)
@@ -26,10 +25,6 @@ class CurriculumAssignment:
 		for name in listOfNames:
 			self.replaceKValueInList(scoreDictionary[name])
 			self.strValuesToInt(scoreDictionary[name])
-
-		for row in scoreTestList[0:1]:
-			for value in row[1:]:
-				testScoresLayout.append(value)
 
 
 	def strValuesToInt(self, listWithStr):
