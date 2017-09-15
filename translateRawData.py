@@ -3,8 +3,7 @@ class TranslateRawData:
 	def __init__(self, listOfGradeCourses, listOfStudentScores):
 		self.gradeCourseDictionary = self.createGradeCourseDictionary(listOfGradeCourses)
 		self.listOfStudentNames = self.createListOfStudentNames(listOfStudentScores)
-		self.testVariable2 = "test2"
-		self.testVariable3 = "test3"
+		self.studentScoreDictionary = self.createStudentScoreDictionary(listOfStudentScores)
 
 
 	def createListOfStudentNames(self, listOfStudentScores):
@@ -28,3 +27,28 @@ class TranslateRawData:
 			gradeCourseDictionary[int(row[0])] = row[1:]
 
 		return (gradeCourseDictionary)
+
+
+	def createStudentScoreDictionary(self, listOfStudentScores):
+		studentScoreDictionary = {}
+
+		for row in listOfStudentScores[1:]:
+			row = filter(None, row)
+			rowValue = self.changeKToZero(row[0:])
+			studentScoreDictionary[row[0]] = list(map(int, rowValue[1:]))
+
+		return (studentScoreDictionary)
+
+
+	def changeKToZero(self, scoreList):
+		newValueList = []
+
+		for score in range(len(scoreList)):
+			if scoreList[score] == "K":
+				newValueList.append('0')
+			else:
+				newValueList.append(scoreList[score])
+
+		return (newValueList)
+
+

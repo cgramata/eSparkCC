@@ -6,34 +6,20 @@ from translateRawData import TranslateRawData
 
 
 def main():
-	domainDictionary = {}
-	testScoreDictionary = {}
-	listOfStudentNames = []
 	finalStudentCurriculum = []
 
 	dataObject = ImportRawData()
 	domainFileReaderMain = dataObject.importDomainFile()
 	testScoresReaderMain = dataObject.importStudentTestFile()
-
-	rawDataObject = TranslateRawData(domainFileReaderMain, testScoresReaderMain)
-
-	#creates objects to access methods or variables
 	curriculumAttribute = CurrSize()
 	curriculumObject = CurriculumAssignment()
-
-	print(rawDataObject.gradeCourseDictionary)
-
-	curriculumObject.storeFileValues(domainFileReaderMain,
-									 testScoresReaderMain,
-									 domainDictionary,
-									 testScoreDictionary,
-									 listOfStudentNames)
+	rawDataObject = TranslateRawData(domainFileReaderMain, testScoresReaderMain)
 
 
-	for name in listOfStudentNames:
-		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name, 
-																	  testScoreDictionary,
-																	  domainDictionary,
+	for name in rawDataObject.listOfStudentNames:
+		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name,
+																	  rawDataObject.studentScoreDictionary, 
+																	  rawDataObject.gradeCourseDictionary, 
 																	  curriculumAttribute.curriculumSize)
 		finalStudentCurriculum.append(madeCurriculum)
 

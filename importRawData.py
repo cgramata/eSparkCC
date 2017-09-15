@@ -1,7 +1,7 @@
 import csv
 
 class ImportRawData:
-		
+
 	def importDomainFile(self):
 		listOfDomainRows = []
 
