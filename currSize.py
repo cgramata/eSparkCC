@@ -1,3 +1,2 @@
 class CurrSize:
-
-	curriculumSize = 6
+    curriculumSize = 6

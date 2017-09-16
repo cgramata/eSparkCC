@@ -1,32 +1,29 @@
 from currSize import CurrSize
 from studentResultObject import StudentResultObject
 from curriculumAssignment import CurriculumAssignment
-from importRawData import ImportRawData
-from translateRawData import TranslateRawData
+from importExportData import ImportExportData
+from translateData import TranslateData
 
 
 def main():
-	finalStudentCurriculum = []
+    finalStudentCurriculum = []
 
-	dataObject = ImportRawData()
-	domainFileReaderMain = dataObject.importDomainFile()
-	testScoresReaderMain = dataObject.importStudentTestFile()
-	curriculumAttribute = CurrSize()
-	curriculumObject = CurriculumAssignment()
-	rawDataObject = TranslateRawData(domainFileReaderMain, testScoresReaderMain)
+    dataObject = ImportExportData()
+    domainFileReaderMain = dataObject.importDomainFile()
+    testScoresReaderMain = dataObject.importStudentTestFile()
+    curriculumAttribute = CurrSize()
+    curriculumObject = CurriculumAssignment()
+    rawDataObject = TranslateData(domainFileReaderMain, testScoresReaderMain)
 
+    for name in rawDataObject.listOfStudentNames:
+        madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name,
+                                                                      rawDataObject.studentScoreDictionary,
+                                                                      rawDataObject.gradeCourseDictionary,
+                                                                      curriculumAttribute.curriculumSize)
+        finalStudentCurriculum.append(madeCurriculum)
 
-	for name in rawDataObject.listOfStudentNames:
-		madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name,
-																	  rawDataObject.studentScoreDictionary, 
-																	  rawDataObject.gradeCourseDictionary, 
-																	  curriculumAttribute.curriculumSize)
-		finalStudentCurriculum.append(madeCurriculum)
-
-	#todo change this to write to a csv file instead of printing
-	for curriculum in finalStudentCurriculum:
-		print curriculum
+    #creates file "resultingStudentCurriculum.csv" in directory
+	dataObject.writeCurriculumResult(finalStudentCurriculum)
 
 
 if __name__ == "__main__": main()
-
