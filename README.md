@@ -1,3 +1,12 @@
+== Running the Program ==
+
+Make sure the following files are in the directory you created: codingChallengeMain.py, curriculumAssignment.py,
+currSize.py, importExportData.py, studentResultObject.py, translateData.py, domain_order.csv, and 
+student_tests.csv.
+
+Using Terminal, navigate to the directory containing the files mentioned. Once there enter 
+this: "python codingChallengeMain.py."
+
 == Setup ==
 
 Our mission is to provide the best learning experiences to students, personalized
