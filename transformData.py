@@ -1,4 +1,4 @@
-class TranslateData:
+class TransformData:
     def __init__(self, listOfGradeCourses, listOfStudentScores):
         self.gradeCourseDictionary = self.createGradeCourseDictionary(listOfGradeCourses)
         self.listOfStudentNames = self.createListOfStudentNames(listOfStudentScores)

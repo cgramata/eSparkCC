@@ -1,2 +1,2 @@
-class CurrSize:
+class ResourceFile:
     curriculumSize = 6

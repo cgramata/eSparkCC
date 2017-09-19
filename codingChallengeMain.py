@@ -1,29 +1,32 @@
-from currSize import CurrSize
+from resourceFile import ResourceFile
 from studentResultObject import StudentResultObject
 from curriculumAssignment import CurriculumAssignment
 from importExportData import ImportExportData
-from translateData import TranslateData
+from transformData import TransformData
 
 
 def main():
     finalStudentCurriculum = []
 
     dataObject = ImportExportData()
-    domainFileReaderMain = dataObject.importDomainFile()
-    testScoresReaderMain = dataObject.importStudentTestFile()
-    curriculumAttribute = CurrSize()
-    curriculumObject = CurriculumAssignment()
-    rawDataObject = TranslateData(domainFileReaderMain, testScoresReaderMain)
+    resourceAttribute = ResourceFile()
+    finalCurriculumObject = CurriculumAssignment()
+    rawDomainFileData = dataObject.importDomainFile()
+    rawTestScoresData = dataObject.importStudentTestFile()
+    transformedDataObject = TransformData(rawDomainFileData, rawTestScoresData)
 
-    for name in rawDataObject.listOfStudentNames:
-        madeCurriculum = curriculumObject.makeTheCurriculumPerStudent(name,
-                                                                      rawDataObject.studentScoreDictionary,
-                                                                      rawDataObject.gradeCourseDictionary,
-                                                                      curriculumAttribute.curriculumSize)
-        finalStudentCurriculum.append(madeCurriculum)
+    for name in transformedDataObject.listOfStudentNames:
+        finalIndividualCurriculum = finalCurriculumObject.makeTheCurriculumPerStudent(name,
+                                                                      transformedDataObject.studentScoreDictionary,
+                                                                      transformedDataObject.gradeCourseDictionary,
+                                                                      resourceAttribute.curriculumSize)
+        finalStudentCurriculum.append(finalIndividualCurriculum)
 
     #creates file "resultingStudentCurriculum.csv" in directory
-	dataObject.writeCurriculumResult(finalStudentCurriculum)
+	  #dataObject.writeCurriculumResult(finalStudentCurriculum)
+
+    for curriculum in finalStudentCurriculum: 
+      print curriculum
 
 
 if __name__ == "__main__": main()
