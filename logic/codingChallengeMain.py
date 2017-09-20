@@ -6,13 +6,14 @@ from transformData import TransformData
 
 
 def main():
-    finalStudentCurriculum = []
+    listOfFinalStudentCurriculums = []
 
     dataObject = ImportExportData()
     resourceAttribute = ResourceFile()
     finalCurriculumObject = CurriculumAssignment()
     rawDomainFileData = dataObject.importDomainFile()
     rawTestScoresData = dataObject.importStudentTestFile()
+
     transformedDataObject = TransformData(rawDomainFileData, rawTestScoresData)
 
     for name in transformedDataObject.listOfStudentNames:
@@ -20,12 +21,12 @@ def main():
                                                                       transformedDataObject.studentScoreDictionary,
                                                                       transformedDataObject.gradeCourseDictionary,
                                                                       resourceAttribute.curriculumSize)
-        finalStudentCurriculum.append(finalIndividualCurriculum)
+        listOfFinalStudentCurriculums.append(finalIndividualCurriculum)
 
     #creates file "resultingStudentCurriculum.csv" in directory
-	  #dataObject.writeCurriculumResult(finalStudentCurriculum)
+	  #dataObject.writeCurriculumForStudent(listOfFinalStudentCurriculums)
 
-    for curriculum in finalStudentCurriculum: 
+    for curriculum in listOfFinalStudentCurriculums: 
       print curriculum
 
 

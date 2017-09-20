@@ -6,7 +6,7 @@ class ImportExportData:
         listOfDomainRows = []
 
         try:
-            domainFile = open("domain_order.csv")
+            domainFile = open("../csvFiles/domain_order.csv")
         except IOError:
             print("Domain file not found, make sure the file is in the directory")
         else:
@@ -21,7 +21,7 @@ class ImportExportData:
         listOfTestScoreRows = []
 
         try:
-            scoresFile = open("student_tests.csv")
+            scoresFile = open("../csvFiles/student_tests.csv")
         except IOError:
             print("Student test file not found, make sure the file is in the directory")
         else:
@@ -32,8 +32,9 @@ class ImportExportData:
 
         return listOfTestScoreRows
 
-    def writeCurriculumResult(self, finalCurriculumList):
+    #creates the final curriculum file in csvFiles Folder
+    def writeCurriculumForStudent(self, finalCurriculumList):
 
-        with open("resultingStudentCurriculum.csv", "w") as studentCurriculum:
+        with open("../csvFiles/resultingStudentCurriculum.csv", "w") as studentCurriculum:
             writer = csv.writer(studentCurriculum)
             writer.writerows(finalCurriculumList)
