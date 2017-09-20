@@ -1,11 +1,11 @@
 == Running the Program ==
 
-Make sure the following files are in the directory you created: codingChallengeMain.py, curriculumAssignment.py,
-currSize.py, importExportData.py, studentResultObject.py, translateData.py, domain_order.csv, and 
-student_tests.csv.
+= Macs =
 
-Using Terminal, navigate to the directory containing the files mentioned. Once there enter 
-this: "python codingChallengeMain.py."
+Make sure the following folders are in the same directory you created: csvFiles and logic.
+
+Using Terminal, navigate to the folder, "logic." Once there enter the following command: 
+"python codingChallengeMain.py."
 
 == Setup ==
 

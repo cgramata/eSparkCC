@@ -23,11 +23,7 @@ def main():
                                                                       resourceAttribute.curriculumSize)
         listOfFinalStudentCurriculums.append(finalIndividualCurriculum)
 
-    #creates file "resultingStudentCurriculum.csv" in directory
-	  #dataObject.writeCurriculumForStudent(listOfFinalStudentCurriculums)
-
-    for curriculum in listOfFinalStudentCurriculums: 
-      print curriculum
-
+    #creates file "resultingStudentCurriculum.csv" in csvFiles folder
+    dataObject.writeCurriculumForStudent(listOfFinalStudentCurriculums)
 
 if __name__ == "__main__": main()
