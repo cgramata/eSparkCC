@@ -7,6 +7,8 @@ Make sure the following folders are in the same directory you created: csvFiles 
 Using Terminal, navigate to the folder, "logic." Once there enter the following command: 
 "python codingChallengeMain.py."
 
+The file: "resultingStudentCurriculum.csv," will print to the folder: "csvFiles."
+
 == Setup ==
 
 Our mission is to provide the best learning experiences to students, personalized
